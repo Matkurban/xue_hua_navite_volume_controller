@@ -468,7 +468,7 @@ public class XueHuaNaviteVolumeControllerPlugin: NSObject, FlutterPlugin {
     reason: String
   ) {
     DispatchQueue.main.async { [weak self] in
-      self?.channel.invokeMethod(
+      self?.channel?.invokeMethod(
         "onVolumeChanged",
         arguments: [
           "state": state,
