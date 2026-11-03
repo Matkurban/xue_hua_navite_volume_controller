@@ -66,7 +66,7 @@ class _VolumeControllerDashboardPageState
   bool _interceptHardwareButtons = false;
   double _appVolume = 1.0;
   double _webGainBoost = 1.0;
-  VolumeStreamType _selectedStream = VolumeStreamType.media;
+  final VolumeStreamType _selectedStream = VolumeStreamType.media;
   bool _isLoading = true;
   final List<String> _eventLogs = <String>[];
 
