@@ -3,7 +3,7 @@ description: "Demonstrates how to use the xue_hua_navite_volume_controller plugi
 publish_to: 'none'
 
 environment:
-  sdk: ^3.13.7
+  sdk: ^3.13.0
 
 dependencies:
   flutter:
@@ -11,9 +11,9 @@ dependencies:
 
   xue_hua_navite_volume_controller:
     path: ../
-
   signals_flutter: ^7.1.0
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^2.0.0
+  material_ui: ^1.9.0
 
 dev_dependencies:
   integration_test:

@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:xue_hua_navite_volume_controller_example/main.dart';
+import 'package:xue_hua_navite_volume_controller_example/app/volume_controller_example_app.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
