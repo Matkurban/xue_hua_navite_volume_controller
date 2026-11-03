@@ -1,0 +1,40 @@
+name: xue_hua_navite_volume_controller
+description: "A new Flutter project."
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ^3.13.0
+  flutter: '>=3.47.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  web: ^1.1.2
+  plugin_platform_interface: ^2.1.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.kurban.xue_hua_navite_volume_controller
+        pluginClass: XueHuaNaviteVolumeControllerPlugin
+      ios:
+        pluginClass: XueHuaNaviteVolumeControllerPlugin
+      linux:
+        pluginClass: XueHuaNaviteVolumeControllerPlugin
+      macos:
+        pluginClass: XueHuaNaviteVolumeControllerPlugin
+      windows:
+        pluginClass: XueHuaNaviteVolumeControllerPluginCApi
+      web:
+        pluginClass: XueHuaNaviteVolumeControllerWeb
+        fileName: xue_hua_navite_volume_controller_web.dart
