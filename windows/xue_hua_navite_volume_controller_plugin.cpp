@@ -4,11 +4,11 @@
 #define NOMINMAX
 #endif
 #include <windows.h>
+#include <mmdeviceapi.h>
+#include <functiondiscoverykeys_devpkey.h>
 #include <audioclient.h>
 #include <audiopolicy.h>
 #include <endpointvolume.h>
-#include <functiondiscoverykeys_devpkey.h>
-#include <mmdeviceapi.h>
 #include <propidl.h>
 
 #include <flutter/method_channel.h>
