@@ -1,7 +1,8 @@
 name: xue_hua_navite_volume_controller
 description: "A new Flutter project."
 version: 0.0.1
-homepage:
+homepage: https://github.com/Matkurban
+repository: https://github.com/Matkurban/xue_hua_navite_volume_controller
 
 environment:
   sdk: ^3.13.0
