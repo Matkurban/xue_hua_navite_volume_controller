@@ -1,0 +1,10 @@
+# skills_lint.yaml
+# Configuration for validating package skills according to https://dart.dev/tools/pub/package-skills
+skills_lint:
+  rules:
+    check-relative-paths: error
+    check-absolute-paths: error
+  directories:
+    - path: "skills/"
+      rules:
+        published-skill-name: error

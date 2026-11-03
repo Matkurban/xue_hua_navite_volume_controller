@@ -2,26 +2,27 @@ package com.kurban.xue_hua_navite_volume_controller
 
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
+import org.mockito.ArgumentCaptor
 import org.mockito.Mockito
 import kotlin.test.Test
-
-/*
- * This demonstrates a simple unit test of the Kotlin portion of this plugin's implementation.
- *
- * Once you have built the plugin's example app, you can run these tests from the command
- * line by running `./gradlew testDebugUnitTest` in the `example/android/` directory, or
- * you can run them directly from IDEs that support JUnit such as Android Studio.
- */
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 internal class XueHuaNaviteVolumeControllerPluginTest {
     @Test
-    fun onMethodCall_getPlatformVersion_returnsExpectedValue() {
+    fun onMethodCall_getCapabilities_returnsExpectedAndroidCapabilities() {
         val plugin = XueHuaNaviteVolumeControllerPlugin()
 
-        val call = MethodCall("getPlatformVersion", null)
+        val call = MethodCall("getCapabilities", null)
         val mockResult: MethodChannel.Result = Mockito.mock(MethodChannel.Result::class.java)
         plugin.onMethodCall(call, mockResult)
 
-        Mockito.verify(mockResult).success("Android " + android.os.Build.VERSION.RELEASE)
+        val captor = ArgumentCaptor.forClass( Any::class.java)
+        Mockito.verify(mockResult).success(captor.capture())
+        val map = captor.value as? Map<*, *>
+        assertTrue(map != null)
+        assertEquals("android", map["platform"])
+        assertEquals(true, map["supportsMultipleStreamTypes"])
+        assertEquals(true, map["supportsHardwareButtonInterception"])
     }
 }

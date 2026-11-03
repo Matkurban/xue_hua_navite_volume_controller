@@ -1,8 +1,17 @@
 name: xue_hua_navite_volume_controller
-description: "A new Flutter project."
-version: 0.0.1
-homepage: https://github.com/Matkurban
+description: "Cross-platform system & application audio volume controller plugin for Flutter (Android, iOS, macOS, Windows, Linux, Web) with multi-stream control, mute, ringer mode, hardware key interception, and device routing."
+version: 1.0.0
+homepage: https://github.com/Matkurban/xue_hua_navite_volume_controller
 repository: https://github.com/Matkurban/xue_hua_navite_volume_controller
+issue_tracker: https://github.com/Matkurban/xue_hua_navite_volume_controller/issues
+documentation: https://github.com/Matkurban/xue_hua_navite_volume_controller#readme
+
+topics:
+  - volume
+  - audio
+  - sound
+  - media
+  - hardware-buttons
 
 environment:
   sdk: ^3.13.0
@@ -20,7 +29,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-
 
 flutter:
   plugin:

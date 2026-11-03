@@ -1,24 +1,19 @@
-// This is a basic Flutter integration test.
-//
-// Since integration tests run in a full Flutter application, they can interact
-// with the host side of a plugin implementation, unlike Dart unit tests.
-//
-// For more information about Flutter integration tests, please see
-// https://flutter.dev/to/integration-testing
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-
 import 'package:xue_hua_navite_volume_controller/xue_hua_navite_volume_controller.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('getPlatformVersion test', (WidgetTester tester) async {
-    final XueHuaNaviteVolumeController plugin = XueHuaNaviteVolumeController();
-    final String? version = await plugin.getPlatformVersion();
-    // The version string depends on the host platform running the test, so
-    // just assert that some non-empty string is returned.
-    expect(version?.isNotEmpty, true);
+  testWidgets('initialize and query volume capabilities on host platform', (
+    WidgetTester tester,
+  ) async {
+    final controller = XueHuaNaviteVolumeController.instance;
+    final state = await controller.initialize();
+    expect(state.volume, inInclusiveRange(0.0, 1.0));
+
+    final capabilities = await controller.getCapabilities();
+    expect(capabilities.platform.isNotEmpty, isTrue);
+    expect(capabilities.supportedStreams, isNotEmpty);
   });
 }

@@ -2,9 +2,5 @@
 
 #include "include/xue_hua_navite_volume_controller/xue_hua_navite_volume_controller_plugin.h"
 
-// This file exposes some plugin internals for unit testing. See
-// https://github.com/flutter/flutter/issues/88724 for current limitations
-// in the unit-testable API.
-
-// Handles the getPlatformVersion method call.
-FlMethodResponse *get_platform_version();
+// Exposes plugin internals for Linux unit testing.
+FlMethodResponse *get_linux_capabilities();

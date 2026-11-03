@@ -2,28 +2,37 @@ import Flutter
 import UIKit
 import XCTest
 
-// If your plugin has been explicitly set to "type: .dynamic" in the Package.swift,
-// you will need to add your plugin as a dependency of RunnerTests within Xcode.
-
 @testable import xue_hua_navite_volume_controller
-
-// This demonstrates a simple unit test of the Swift portion of this plugin's implementation.
-//
-// See https://developer.apple.com/documentation/xctest for more information about using XCTest.
 
 class RunnerTests: XCTestCase {
 
-  func testGetPlatformVersion() {
+  func testGetCapabilitiesReturnsIOSBackend() {
     let plugin = XueHuaNaviteVolumeControllerPlugin()
+    let call = FlutterMethodCall(methodName: "getCapabilities", arguments: nil)
 
-    let call = FlutterMethodCall(methodName: "getPlatformVersion", arguments: [])
-
-    let resultExpectation = expectation(description: "result block must be called.")
+    let resultExpectation = expectation(description: "getCapabilities result block must be called.")
     plugin.handle(call) { result in
-      XCTAssertEqual(result as! String, "iOS " + UIDevice.current.systemVersion)
+      let map = result as? [String: Any?]
+      XCTAssertNotNil(map)
+      XCTAssertEqual(map?["platform"] as? String, "ios")
+      XCTAssertEqual(map?["supportsSystemVolumeControl"] as? Bool, true)
       resultExpectation.fulfill()
     }
-    waitForExpectations(timeout: 1)
+    waitForExpectations(timeout: 2.0)
+  }
+
+  func testGetVolumeReturnsNormalizedRange() {
+    let plugin = XueHuaNaviteVolumeControllerPlugin()
+    let call = FlutterMethodCall(methodName: "getVolume", arguments: ["streamType": "media"])
+
+    let resultExpectation = expectation(description: "getVolume result block must be called.")
+    plugin.handle(call) { result in
+      let vol = (result as? NSNumber)?.doubleValue ?? -1.0
+      XCTAssertGreaterThanOrEqual(vol, 0.0)
+      XCTAssertLessThanOrEqual(vol, 1.0)
+      resultExpectation.fulfill()
+    }
+    waitForExpectations(timeout: 2.0)
   }
 
 }
