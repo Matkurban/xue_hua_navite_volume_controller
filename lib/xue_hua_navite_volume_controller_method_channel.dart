@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -144,9 +145,7 @@ class MethodChannelXueHuaNaviteVolumeController
   }
 
   @override
-  Future<double> getVolume({
-    VolumeStreamType stream = VolumeStreamType.media,
-  }) {
+  Future<double> getVolume({VolumeStreamType stream = VolumeStreamType.media}) {
     return _invokeWithErrorWrapping(() async {
       final result = await methodChannel.invokeMethod<Object?>(
         'getVolume',
@@ -257,8 +256,10 @@ class MethodChannelXueHuaNaviteVolumeController
         final key = entry.key?.toString();
         final val = entry.value;
         if (key != null && val is num) {
-          mapped[VolumeStreamType.fromWireName(key)] =
-              val.toDouble().clamp(0.0, 1.0);
+          mapped[VolumeStreamType.fromWireName(key)] = val.toDouble().clamp(
+            0.0,
+            1.0,
+          );
         }
       }
       return mapped;
@@ -266,9 +267,7 @@ class MethodChannelXueHuaNaviteVolumeController
   }
 
   @override
-  Future<bool> isMuted({
-    VolumeStreamType stream = VolumeStreamType.media,
-  }) {
+  Future<bool> isMuted({VolumeStreamType stream = VolumeStreamType.media}) {
     return _invokeWithErrorWrapping(() async {
       final result = await methodChannel.invokeMethod<Object?>(
         'isMuted',

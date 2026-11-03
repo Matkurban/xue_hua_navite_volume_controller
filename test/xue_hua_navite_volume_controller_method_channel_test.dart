@@ -186,38 +186,44 @@ void main() {
     expect(caps.supportedStreams, contains(VolumeStreamType.ring));
   });
 
-  test('setVolume, adjustVolume, stepVolume, and mute operations work', () async {
-    final afterSet = await platform.setVolume(0.35);
-    expect(afterSet.volume, closeTo(0.35, 0.001));
+  test(
+    'setVolume, adjustVolume, stepVolume, and mute operations work',
+    () async {
+      final afterSet = await platform.setVolume(0.35);
+      expect(afterSet.volume, closeTo(0.35, 0.001));
 
-    final afterAdjust = await platform.adjustVolume(0.15);
-    expect(afterAdjust.volume, closeTo(0.50, 0.001));
+      final afterAdjust = await platform.adjustVolume(0.15);
+      expect(afterAdjust.volume, closeTo(0.50, 0.001));
 
-    final afterStep = await platform.stepVolume(VolumeDirection.up);
-    expect(afterStep.volume, closeTo(0.55, 0.001));
+      final afterStep = await platform.stepVolume(VolumeDirection.up);
+      expect(afterStep.volume, closeTo(0.55, 0.001));
 
-    final mutedState = await platform.setMute(true);
-    expect(mutedState.isMuted, isTrue);
+      final mutedState = await platform.setMute(true);
+      expect(mutedState.isMuted, isTrue);
 
-    final toggledState = await platform.toggleMute();
-    expect(toggledState.isMuted, isFalse);
-  });
+      final toggledState = await platform.toggleMute();
+      expect(toggledState.isMuted, isFalse);
+    },
+  );
 
-  test('getAllStreamVolumes, ringerMode, outputDevices, and appVolume work', () async {
-    final streams = await platform.getAllStreamVolumes();
-    expect(streams[VolumeStreamType.alarm], closeTo(1.0, 0.001));
+  test(
+    'getAllStreamVolumes, ringerMode, outputDevices, and appVolume work',
+    () async {
+      final streams = await platform.getAllStreamVolumes();
+      expect(streams[VolumeStreamType.alarm], closeTo(1.0, 0.001));
 
-    final mode = await platform.setRingerMode(RingerMode.vibrate);
-    expect(mode, RingerMode.vibrate);
+      final mode = await platform.setRingerMode(RingerMode.vibrate);
+      expect(mode, RingerMode.vibrate);
 
-    final devices = await platform.getOutputDevices();
-    expect(devices, hasLength(1));
-    expect(devices.first.name, 'Mock Studio Monitor');
+      final devices = await platform.getOutputDevices();
+      expect(devices, hasLength(1));
+      expect(devices.first.name, 'Mock Studio Monitor');
 
-    final switched = await platform.setOutputDevice('mock_speaker_1');
-    expect(switched, isTrue);
+      final switched = await platform.setOutputDevice('mock_speaker_1');
+      expect(switched, isTrue);
 
-    final appVol = await platform.setAppVolume(0.42);
-    expect(appVol, closeTo(0.42, 0.001));
-  });
+      final appVol = await platform.setAppVolume(0.42);
+      expect(appVol, closeTo(0.42, 0.001));
+    },
+  );
 }

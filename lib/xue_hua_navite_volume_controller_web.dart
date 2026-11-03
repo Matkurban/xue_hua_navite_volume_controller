@@ -311,9 +311,7 @@ class XueHuaNaviteVolumeControllerWeb
   @override
   Future<Map<VolumeStreamType, double>> getAllStreamVolumes() async {
     final current = _isMuted ? 0.0 : _volume;
-    return <VolumeStreamType, double>{
-      VolumeStreamType.media: current,
-    };
+    return <VolumeStreamType, double>{VolumeStreamType.media: current};
   }
 
   @override
@@ -406,9 +404,10 @@ class XueHuaNaviteVolumeControllerWeb
               route: label.toLowerCase().contains('bluetooth')
                   ? AudioOutputRoute.bluetooth
                   : label.toLowerCase().contains('usb')
-                      ? AudioOutputRoute.usb
-                      : AudioOutputRoute.speaker,
-              isDefault: id == _selectedDeviceId ||
+                  ? AudioOutputRoute.usb
+                  : AudioOutputRoute.speaker,
+              isDefault:
+                  id == _selectedDeviceId ||
                   (devices.isEmpty && _selectedDeviceId == 'default'),
               isOutput: true,
               isInput: false,
@@ -459,10 +458,7 @@ class XueHuaNaviteVolumeControllerWeb
       }
     }
     _syncAllMediaElements();
-    _emitChange(
-      oldVolume: _isMuted ? 0.0 : _volume,
-      reason: 'routeChange',
-    );
+    _emitChange(oldVolume: _isMuted ? 0.0 : _volume, reason: 'routeChange');
     return true;
   }
 

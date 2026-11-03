@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'src/volume_controller_models.dart';
@@ -64,9 +65,7 @@ abstract class XueHuaNaviteVolumeControllerPlatform extends PlatformInterface {
   }
 
   /// Gets the normalized volume (`0.0` to `1.0`) for [stream].
-  Future<double> getVolume({
-    VolumeStreamType stream = VolumeStreamType.media,
-  }) {
+  Future<double> getVolume({VolumeStreamType stream = VolumeStreamType.media}) {
     throw UnimplementedError('getVolume() has not been implemented.');
   }
 
@@ -109,9 +108,7 @@ abstract class XueHuaNaviteVolumeControllerPlatform extends PlatformInterface {
   }
 
   /// Checks whether [stream] (or the system master output) is currently muted.
-  Future<bool> isMuted({
-    VolumeStreamType stream = VolumeStreamType.media,
-  }) {
+  Future<bool> isMuted({VolumeStreamType stream = VolumeStreamType.media}) {
     throw UnimplementedError('isMuted() has not been implemented.');
   }
 
@@ -146,7 +143,9 @@ abstract class XueHuaNaviteVolumeControllerPlatform extends PlatformInterface {
   /// Checks whether the app has Do Not Disturb (`NotificationPolicy`) access on Android.
   /// Returns `true` on platforms where DND access is not required.
   Future<bool> hasDoNotDisturbAccess() {
-    throw UnimplementedError('hasDoNotDisturbAccess() has not been implemented.');
+    throw UnimplementedError(
+      'hasDoNotDisturbAccess() has not been implemented.',
+    );
   }
 
   /// Opens the system Do Not Disturb access settings screen on Android so the user

@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 
 import 'src/volume_controller_models.dart';
@@ -119,9 +120,7 @@ class XueHuaNaviteVolumeController {
   }
 
   /// Reads the current normalized volume (`0.0` to `1.0`) for [stream].
-  Future<double> getVolume({
-    VolumeStreamType stream = VolumeStreamType.media,
-  }) {
+  Future<double> getVolume({VolumeStreamType stream = VolumeStreamType.media}) {
     return _platform.getVolume(stream: stream);
   }
 
@@ -225,9 +224,7 @@ class XueHuaNaviteVolumeController {
   }
 
   /// Returns `true` if [stream] (or the system master output) is currently muted.
-  Future<bool> isMuted({
-    VolumeStreamType stream = VolumeStreamType.media,
-  }) {
+  Future<bool> isMuted({VolumeStreamType stream = VolumeStreamType.media}) {
     return _platform.isMuted(stream: stream);
   }
 

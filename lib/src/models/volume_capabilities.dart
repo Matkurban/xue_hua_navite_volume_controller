@@ -86,7 +86,8 @@ class VolumeCapabilities {
   factory VolumeCapabilities.fromMap(Map<Object?, Object?> map) {
     final rawStreams =
         map['supportedStreams'] as List<Object?>? ?? const <Object?>['media'];
-    final rawNotes = map['platformNotes'] as List<Object?>? ?? const <Object?>[];
+    final rawNotes =
+        map['platformNotes'] as List<Object?>? ?? const <Object?>[];
     return VolumeCapabilities(
       platform: (map['platform'] as String?) ?? 'unknown',
       supportsSystemVolumeControl:

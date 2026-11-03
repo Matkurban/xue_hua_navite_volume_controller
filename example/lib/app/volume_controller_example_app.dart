@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:xue_hua_navite_volume_controller_example/themes/app_theme.dart';
 
 import '../pages/volume_dashboard_page.dart';
 
@@ -13,20 +14,9 @@ class VolumeControllerExampleApp extends StatelessWidget {
     return MaterialApp(
       title: 'XueHua Volume Controller',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF2563EB),
-          brightness: Brightness.light,
-        ),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF3B82F6),
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.system,
       home: const VolumeDashboardPage(),
     );
   }
