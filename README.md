@@ -4,10 +4,6 @@ English | [简体中文](./README_ZH.md)
 
 A production-grade, 6-platform system and application audio volume controller plugin for Flutter (`Android`, `iOS`, `macOS`, `Windows`, `Linux`, and `Web`).
 
-- **Author**: Matkurban (`3496354336@qq.com`)
-- **Repository**: [https://github.com/Matkurban/xue_hua_navite_volume_controller](https://github.com/Matkurban/xue_hua_navite_volume_controller)
-- **Version**: `1.0.0`
-
 ## Features
 
 - **Unified Normalized Volume Control (`0.0`–`1.0`)**: Read (`getVolume`), write (`setVolume`), adjust by relative delta (`adjustVolume`), or step up/down (`stepVolume`, `volumeUp`, `volumeDown`) with rich state snapshots (`VolumeState`).
@@ -23,18 +19,18 @@ A production-grade, 6-platform system and application audio volume controller pl
 
 ## Platform Architecture & Differences
 
-| Capability | Android (`API 24+`) | iOS (`15.0+`) | macOS (`12.0+`) | Windows (`10/11`) | Linux (`GTK3`) | Web (`WASM / JS`) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Native Audio Backend** | `AudioManager` + `Window.Callback` | `AVAudioSession` + `MPVolumeView` | `CoreAudio` (`AudioObjectProperty`) | `MMDeviceAPI` + `IAudioEndpointVolume` | `PulseAudio` (`pactl`) / `PipeWire` (`wpctl`) / `ALSA` (`amixer`) | `HTMLMediaElement` + `WebAudio GainNode` |
-| **System Master Volume** | Yes | Yes (physical device) | Yes | Yes (+ dB reading) | Yes | Sandboxed (controls DOM `<audio>`/`<video>`) |
-| **Multi-Stream Support** | 8 independent streams | Unified output | Unified output | Unified output | Unified output | Unified DOM media |
-| **Mute Control** | `ADJUST_MUTE` / `ADJUST_UNMUTE` | Software 0.0 + restore | `kAudioDevicePropertyMute` + fallback | `IAudioEndpointVolume::SetMute` | Sink mute (`pactl`/`wpctl`/`amixer`) | `.muted` property + restore |
-| **System Volume HUD Toggle** | Yes (`FLAG_SHOW_UI`) | Yes (offscreen `MPVolumeView`) | Managed by macOS | Managed by Windows | Managed by DE | N/A |
-| **Hardware Key Interception** | Yes (`KEYCODE_VOLUME_*`) | No (restricted by iOS) | No | No | No | No |
-| **Ringer Mode & DND** | `normal`, `vibrate`, `silent` | Maps to mute state | Maps to mute state | Maps to mute state | Maps to mute state | Maps to mute state |
-| **Audio Device Listing** | `getDevices(GET_DEVICES_OUTPUTS)` | `currentRoute.outputs` | `kAudioHardwarePropertyDevices` | `EnumAudioEndpoints` | Default sink query | `mediaDevices.enumerateDevices()` |
-| **Output Device Switching** | Android 12+ comm device | System route picker only | `kAudioHardwarePropertyDefaultOutputDevice` | `IPolicyConfig::SetDefaultEndpoint` | `pactl set-default-sink` | `HTMLMediaElement.setSinkId` |
-| **Per-App Volume / Gain** | Media stream | Media stream | Master stream | `ISimpleAudioVolume` (per-process) | Master sink | DOM volume + `GainNode` (`0.0`–`4.0`) |
+| Capability                    | Android (`API 24+`)                | iOS (`15.0+`)                     | macOS (`12.0+`)                             | Windows (`10/11`)                      | Linux (`GTK3`)                                                    | Web (`WASM / JS`)                            |
+|:------------------------------|:-----------------------------------|:----------------------------------|:--------------------------------------------|:---------------------------------------|:------------------------------------------------------------------|:---------------------------------------------|
+| **Native Audio Backend**      | `AudioManager` + `Window.Callback` | `AVAudioSession` + `MPVolumeView` | `CoreAudio` (`AudioObjectProperty`)         | `MMDeviceAPI` + `IAudioEndpointVolume` | `PulseAudio` (`pactl`) / `PipeWire` (`wpctl`) / `ALSA` (`amixer`) | `HTMLMediaElement` + `WebAudio GainNode`     |
+| **System Master Volume**      | Yes                                | Yes (physical device)             | Yes                                         | Yes (+ dB reading)                     | Yes                                                               | Sandboxed (controls DOM `<audio>`/`<video>`) |
+| **Multi-Stream Support**      | 8 independent streams              | Unified output                    | Unified output                              | Unified output                         | Unified output                                                    | Unified DOM media                            |
+| **Mute Control**              | `ADJUST_MUTE` / `ADJUST_UNMUTE`    | Software 0.0 + restore            | `kAudioDevicePropertyMute` + fallback       | `IAudioEndpointVolume::SetMute`        | Sink mute (`pactl`/`wpctl`/`amixer`)                              | `.muted` property + restore                  |
+| **System Volume HUD Toggle**  | Yes (`FLAG_SHOW_UI`)               | Yes (offscreen `MPVolumeView`)    | Managed by macOS                            | Managed by Windows                     | Managed by DE                                                     | N/A                                          |
+| **Hardware Key Interception** | Yes (`KEYCODE_VOLUME_*`)           | No (restricted by iOS)            | No                                          | No                                     | No                                                                | No                                           |
+| **Ringer Mode & DND**         | `normal`, `vibrate`, `silent`      | Maps to mute state                | Maps to mute state                          | Maps to mute state                     | Maps to mute state                                                | Maps to mute state                           |
+| **Audio Device Listing**      | `getDevices(GET_DEVICES_OUTPUTS)`  | `currentRoute.outputs`            | `kAudioHardwarePropertyDevices`             | `EnumAudioEndpoints`                   | Default sink query                                                | `mediaDevices.enumerateDevices()`            |
+| **Output Device Switching**   | Android 12+ comm device            | System route picker only          | `kAudioHardwarePropertyDefaultOutputDevice` | `IPolicyConfig::SetDefaultEndpoint`    | `pactl set-default-sink`                                          | `HTMLMediaElement.setSinkId`                 |
+| **Per-App Volume / Gain**     | Media stream                       | Media stream                      | Master stream                               | `ISimpleAudioVolume` (per-process)     | Master sink                                                       | DOM volume + `GainNode` (`0.0`–`4.0`)        |
 
 ## Installation & Native Setup
 
@@ -200,7 +196,3 @@ This package ships with an official AI Agent Skill under `skills/xue_hua_navite_
 ```bash
 dart run skills@ get
 ```
-
-## License
-
-MIT License © 2026 Matkurban (`3496354336@qq.com`)

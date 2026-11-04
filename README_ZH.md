@@ -4,10 +4,6 @@
 
 一款面向 Flutter 的全平台（`Android`、`iOS`、`macOS`、`Windows`、`Linux`、`Web`）系统级与应用级声音控制插件。深入适配六大操作系统底层音频架构差异，提供统一的音量读写、多音频流混音、静音兜底、响铃模式与免打扰权限引导、原生音量 HUD 显隐控制、物理音量键拦截、音频输出设备枚举与切换以及 WebAudio 增益放大能力。
 
-- **作者**：Matkurban（`3496354336@qq.com`）
-- **仓库地址**：[https://github.com/Matkurban/xue_hua_navite_volume_controller](https://github.com/Matkurban/xue_hua_navite_volume_controller)
-- **当前版本**：`1.0.0`
-
 ## 核心特性
 
 - **统一归一化音量控制（`0.0`–`1.0`）**：支持读取当前音量（`getVolume`）、设置目标音量（`setVolume`）、按相对增减量调节（`adjustVolume`）、按硬件步进微调（`stepVolume`、`volumeUp`、`volumeDown`）以及读取完整状态快照（`getVolumeState`）。
@@ -23,18 +19,18 @@
 
 ## 各平台底层实现与差异对比
 
-| 功能特性 | Android (`API 24+`) | iOS (`15.0+`) | macOS (`12.0+`) | Windows (`10/11`) | Linux (`GTK3`) | Web (`WASM / JS`) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **底层原生引擎** | `AudioManager` + `Window.Callback` | `AVAudioSession` + `MPVolumeView` | `CoreAudio` (`AudioObjectProperty`) | `MMDeviceAPI` + `IAudioEndpointVolume` | `PulseAudio` (`pactl`) / `PipeWire` (`wpctl`) / `ALSA` (`amixer`) | `HTMLMediaElement` + `WebAudio GainNode` |
-| **系统主音量控制** | 支持 | 支持（需真机） | 支持 | 支持（含 dB 分贝读取） | 支持 | 浏览器沙箱限制（自动同步页面内 `<audio>`/`<video>`） |
-| **多音频流独立控制** | 支持 8 路独立音频流 | 系统统一输出通道 | 系统统一输出通道 | 系统统一输出通道 | 系统统一输出通道 | 页面统一媒体流 |
-| **静音与恢复机制** | 硬件流静音 `ADJUST_MUTE` | 软件零音量 + 记忆恢复 | `kAudioDevicePropertyMute` + 零音量兜底 | `IAudioEndpointVolume::SetMute` | 音频接收器静音（`pactl`/`wpctl`/`amixer`） | DOM `.muted` 属性 + 恢复 |
-| **系统音量 HUD 显隐** | 支持（`FLAG_SHOW_UI`） | 支持（离屏 `MPVolumeView`） | 由 macOS 系统管理 | 由 Windows 系统管理 | 由桌面环境管理 | 不适用 |
-| **物理音量键拦截** | 支持（`KEYCODE_VOLUME_*`） | 不支持（iOS 系统限制） | 不支持 | 不支持 | 不支持 | 不支持 |
-| **响铃模式与免打扰** | `normal` / `vibrate` / `silent` | 映射为静音状态 | 映射为静音状态 | 映射为静音状态 | 映射为静音状态 | 映射为静音状态 |
-| **输出设备枚举** | `getDevices(GET_DEVICES_OUTPUTS)` | `currentRoute.outputs` | `kAudioHardwarePropertyDevices` | `EnumAudioEndpoints` | 默认 Sink 查询 | `mediaDevices.enumerateDevices()` |
-| **输出设备切换** | Android 12+ 通信设备切换 | 仅限系统路由选择器 | `kAudioHardwarePropertyDefaultOutputDevice` | `IPolicyConfig::SetDefaultEndpoint` | `pactl set-default-sink` | `HTMLMediaElement.setSinkId` |
-| **应用独立音量/增益** | 映射至媒体流 | 映射至媒体流 | 映射至主音量 | `ISimpleAudioVolume` 进程级音量 | 映射至主输出 | DOM 音量 + `GainNode`（`0.0`–`4.0`） |
+| 功能特性              | Android (`API 24+`)                | iOS (`15.0+`)                     | macOS (`12.0+`)                             | Windows (`10/11`)                      | Linux (`GTK3`)                                                    | Web (`WASM / JS`)                                    |
+|:----------------------|:-----------------------------------|:----------------------------------|:--------------------------------------------|:---------------------------------------|:------------------------------------------------------------------|:-----------------------------------------------------|
+| **底层原生引擎**      | `AudioManager` + `Window.Callback` | `AVAudioSession` + `MPVolumeView` | `CoreAudio` (`AudioObjectProperty`)         | `MMDeviceAPI` + `IAudioEndpointVolume` | `PulseAudio` (`pactl`) / `PipeWire` (`wpctl`) / `ALSA` (`amixer`) | `HTMLMediaElement` + `WebAudio GainNode`             |
+| **系统主音量控制**    | 支持                               | 支持（需真机）                    | 支持                                        | 支持（含 dB 分贝读取）                 | 支持                                                              | 浏览器沙箱限制（自动同步页面内 `<audio>`/`<video>`） |
+| **多音频流独立控制**  | 支持 8 路独立音频流                | 系统统一输出通道                  | 系统统一输出通道                            | 系统统一输出通道                       | 系统统一输出通道                                                  | 页面统一媒体流                                       |
+| **静音与恢复机制**    | 硬件流静音 `ADJUST_MUTE`           | 软件零音量 + 记忆恢复             | `kAudioDevicePropertyMute` + 零音量兜底     | `IAudioEndpointVolume::SetMute`        | 音频接收器静音（`pactl`/`wpctl`/`amixer`）                        | DOM `.muted` 属性 + 恢复                             |
+| **系统音量 HUD 显隐** | 支持（`FLAG_SHOW_UI`）             | 支持（离屏 `MPVolumeView`）       | 由 macOS 系统管理                           | 由 Windows 系统管理                    | 由桌面环境管理                                                    | 不适用                                               |
+| **物理音量键拦截**    | 支持（`KEYCODE_VOLUME_*`）         | 不支持（iOS 系统限制）            | 不支持                                      | 不支持                                 | 不支持                                                            | 不支持                                               |
+| **响铃模式与免打扰**  | `normal` / `vibrate` / `silent`    | 映射为静音状态                    | 映射为静音状态                              | 映射为静音状态                         | 映射为静音状态                                                    | 映射为静音状态                                       |
+| **输出设备枚举**      | `getDevices(GET_DEVICES_OUTPUTS)`  | `currentRoute.outputs`            | `kAudioHardwarePropertyDevices`             | `EnumAudioEndpoints`                   | 默认 Sink 查询                                                    | `mediaDevices.enumerateDevices()`                    |
+| **输出设备切换**      | Android 12+ 通信设备切换           | 仅限系统路由选择器                | `kAudioHardwarePropertyDefaultOutputDevice` | `IPolicyConfig::SetDefaultEndpoint`    | `pactl set-default-sink`                                          | `HTMLMediaElement.setSinkId`                         |
+| **应用独立音量/增益** | 映射至媒体流                       | 映射至媒体流                      | 映射至主音量                                | `ISimpleAudioVolume` 进程级音量        | 映射至主输出                                                      | DOM 音量 + `GainNode`（`0.0`–`4.0`）                 |
 
 ## 集成与平台配置
 
@@ -200,7 +196,3 @@ await controller.setWebGainBoost(2.0);
 ```bash
 dart run skills@ get
 ```
-
-## 开源协议
-
-MIT License © 2026 Matkurban (`3496354336@qq.com`)
